@@ -1,0 +1,45 @@
+<%= form_with(model: restaurant_review, local: true) do |form| %>
+  <% if restaurant_review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(restaurant_review.errors.count, "error") %> prohibited this restaurant_review from being saved:</h2>
+
+      <ul>
+        <% restaurant_review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="field">
+            <%= form.label :user_id %>
+            <%= form.number_field :user_id %>
+             </div>
+        
+            <div class="field">
+            <%= form.label :restaurant_id %>
+            <%= form.number_field :restaurant_id %>
+            </div>
+            
+          <div class="field" >
+            <%= form.label :rating %>
+            <br>
+            <%= form.select :rating, options_for_select([["Select One", ""], "1", "2", "3", "4", "5"])%>
+          </div>
+          
+          <div class="field form-floating">
+          <%= form.text_area :review, class:"form-control", placeholder:"Leave a comment here", id:"floatingTextarea" %>
+           <label for="floatingTextarea">Review</label>
+        </div>
+        
+
+        
+          <div class="actions">
+            <%= form.submit :Submit , class:"btn btn-primary" %>
+          </div>
+        </div>
+    </div>
+  
+<% end %>
