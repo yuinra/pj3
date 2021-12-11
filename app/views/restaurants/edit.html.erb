@@ -1,0 +1,10 @@
+<div class="card w-50">
+    <div class="card-body">
+        <h1>レストラン編集</h1>
+        <hr>
+        <%= render 'form', restaurant: @restaurant %>
+
+        <%= link_to '詳細', @restaurant, class:"btn btn-info" %> |
+        <%= link_to '戻る', restaurants_path, class:"btn btn-warning" %>
+    </div>
+</div>
