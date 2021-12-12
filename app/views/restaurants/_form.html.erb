@@ -1,0 +1,50 @@
+<%= form_with(model: restaurant) do |form| %>
+<% if restaurant.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+  <ul>
+    <% restaurant.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="field form-group">
+  <%= form.label :レストラン名 %>
+  <%= 
+      form.text_field :name,
+      class: "form-control"
+    %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :レストランのアドレス %>
+  <%= 
+      form.text_field :addresss,
+      class: "form-control"
+    %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :イメージ %></br>
+  <%= 
+      form.file_field :image,
+      class: "form-control"
+    %>
+</div>
+
+<div class="field form-group">
+  <%= form.label :詳細 %>
+  <%= 
+      form.text_area :detail,
+      class: "form-control"
+    %>
+</div>
+
+</br>
+<div class="actions">
+  <%= form.submit  class: "btn btn-primary", value: '保存' %>
+</div>
+<% end %>
