@@ -1,5 +1,43 @@
-<div class="card w-50">
-  <% if @food.image.attached? %>
+<style>
+    .container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.c1, .c2 {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .c1 {
+    width: 50%;
+    -webkit-order: 2;
+    order: 2;
+  }
+
+  .c2 {
+    width: 50%;
+    -webkit-order: 1;
+    order: 1;
+  }
+}
+
+
+@media (min-width: 800px) {
+  .c1 {
+    width: 60%;
+  }
+  .c2 {
+    width: 40%;
+  }
+}
+</style>
+<h1 class="mb-3">Food Show</h1></br>
+<div class="container">
+    <div class="c2 card p-3">
+        <% if @food.image.attached? %>
   <%= image_tag @food.image, class:"m-3" %>
   <% end %>
   <div class="card-body">
@@ -18,4 +56,27 @@
     <%= link_to 'Back', restaurant_path(@restaurant), class:"btn btn-secondary btn-sm" %>
     
   </div>
+    </div>
+    <div class="c1 p-3">
+        <h3>Comment</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>お名前</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Duong</td>
+                    <td>asdfsdf</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <%= link_to "Add comment" %>
+    </div>
 </div>
+
