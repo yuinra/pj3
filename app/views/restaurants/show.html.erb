@@ -48,9 +48,9 @@
     }
 </style>
 
-<h1>レストラン詳細</h1>
-<hr>
-<div class="container mb-4" role="main">
+<h2>レストラン詳細</h2>
+
+<div class="container mb-4 mt-5" role="main">
     <div class="c1 card p-3">
         <% if @restaurant.image.attached? %>
         <%= image_tag @restaurant.image, class:"w-100" %>
@@ -88,17 +88,16 @@
                 <% @restaurant.foods.each do |food| %>
                 <tr>
                     <td>
-                        <%= food.name %>
+                        <%= link_to food.name, restaurant_food_path(@restaurant, food) %>
                     </td>
                     <td>
-                        <%= food.description %>
+                        <%= food.price %>
                     </td>
                 </tr>
                 <% end %>
             </tbody>
         </table>
-        <hr>
-        <%= link_to "Add food", class:"btn btn-primary" %>
+        <%= link_to "Add food", new_restaurant_food_path(@restaurant), class:"btn btn-warning" %>
     </div>
 
     <div class="c3 p-3">
