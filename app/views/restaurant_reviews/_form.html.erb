@@ -1,4 +1,4 @@
-<%= form_with(model: restaurant_review, local: true) do |form| %>
+<%= form_with(model: [@restaurant,@restaurant_review], local: true) do |form| %>
   <% if restaurant_review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(restaurant_review.errors.count, "error") %> prohibited this restaurant_review from being saved:</h2>
@@ -13,15 +13,6 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="field">
-            <%= form.label :user_id %>
-            <%= form.number_field :user_id %>
-             </div>
-        
-            <div class="field">
-            <%= form.label :restaurant_id %>
-            <%= form.number_field :restaurant_id %>
-            </div>
             
           <div class="field" >
             <%= form.label :rating %>
@@ -33,8 +24,6 @@
           <%= form.text_area :review, class:"form-control", placeholder:"Leave a comment here", id:"floatingTextarea" %>
            <label for="floatingTextarea">Review</label>
         </div>
-        
-
         
           <div class="actions">
             <%= form.submit :Submit , class:"btn btn-primary" %>

@@ -1,6 +1,6 @@
 class RestaurantReviewsController < ApplicationController
   before_action :set_restaurant_review, only: %i[ show edit update destroy ]
-
+#   before_action :find_restaurant
   # GET /restaurant_reviews or /restaurant_reviews.json
   def index
     @restaurant_reviews = RestaurantReview.all
@@ -8,12 +8,12 @@ class RestaurantReviewsController < ApplicationController
 
   # GET /restaurant_reviews/1 or /restaurant_reviews/1.json
   def show
+     
   end
 
   # GET /restaurant_reviews/new
   def new
     @restaurant_review = RestaurantReview.new
-    # @restaurant_review.images.build
   end
   
 
@@ -24,11 +24,12 @@ class RestaurantReviewsController < ApplicationController
   # POST /restaurant_reviews or /restaurant_reviews.json
   def create
     @restaurant_review = RestaurantReview.new(restaurant_review_params)
-
+    @restaurant_review.user_id = current_user.id
+    # @restaurant_review.restaurant_id = @restaurant.id
     respond_to do |format|
       if @restaurant_review.save
-        format.html { redirect_to @restaurant_review, notice: "Restaurant review was successfully created." }
-        format.json { render :show, status: :created, location: @restaurant_review }
+        format.html { redirect_to restaurants_path, notice: "Restaurant review was successfully created." }
+        format.json { render :index, status: :created, location: @restaurant_review }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @restaurant_review.errors, status: :unprocessable_entity }

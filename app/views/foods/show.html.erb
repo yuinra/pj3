@@ -1,0 +1,21 @@
+<div class="card w-50">
+  <% if @food.image.attached? %>
+  <%= image_tag @food.image, class:"m-3" %>
+  <% end %>
+  <div class="card-body">
+    <h4 class="card-title"><%= @food.name %></h4>
+    <p class="card-text">
+      <strong>Description:</strong>
+      <%= @food.description %>
+    </p>
+    <p class="card-text">
+        <strong>Price:</strong>
+        <%= @food.price %>
+    </p>
+    
+    <%= link_to 'Edit', edit_restaurant_food_path(@restaurant, @food), class:"btn btn-warning btn-sm" %> |
+    <%= link_to "Delete", [@restaurant, @food], :method  => :delete, class:"btn btn-danger btn-sm" %> |
+    <%= link_to 'Back', restaurant_path(@restaurant), class:"btn btn-secondary btn-sm" %>
+    
+  </div>
+</div>
