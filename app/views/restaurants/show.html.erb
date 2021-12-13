@@ -1,46 +1,123 @@
-<h1>レストラン詳細</h1>
+<style>
+    .container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+    }
 
-<div class="d-flex justify-content-center">
-    <div class="card col-sm-10 col-md-4 col-xs-3 m-3">
-      <% if @restaurant.image.attached? %>
-      <%= image_tag @restaurant.image %>
-      <% end %>
-      <div class="card-body">
-        <h4 class="card-title"><%= @restaurant.name %></h4>
-        <p class="card-text">
-          <strong>レストランのアドレス:</strong>
-          <%= @restaurant.addresss %>
-        </p>
-        <p class="card-text">
-            <strong>詳細:</strong>
-            <%= @restaurant.detail %>
-        </p>
-        
-        <%= link_to '編集', edit_restaurant_path(@restaurant), class:"btn btn-primary" %> |
-        <%= link_to '戻る', restaurants_path, class:"btn btn-warning" %>
-      </div>
-    </div>
-    
-    <div class="card col-sm-10 col-md-4 col-xs-3 m-3">
+    .c1,
+    .c2,
+    .c3 {
+        width: 100%;
+    }
+
+    @media (min-width: 600px) {
+        .c1 {
+            width: 40%;
+            -webkit-order: 2;
+            order: 2;
+        }
+
+        .c2 {
+            width: 60%;
+            -webkit-order: 1;
+            order: 1;
+        }
+
+        .c3 {
+            width: 100%;
+            -webkit-order: 3;
+            order: 3;
+        }
+    }
+
+
+    @media (min-width: 800px) {
+        .c2 {
+            width: 25%;
+        }
+
+        .c1 {
+            width: 50%;
+        }
+
+        .c3 {
+            width: 25%;
+        }
+    }
+</style>
+
+<h1>レストラン詳細</h1>
+<hr>
+<div class="container mb-4" role="main">
+    <div class="c1 card p-3">
+        <% if @restaurant.image.attached? %>
+        <%= image_tag @restaurant.image, class:"w-100" %>
+        <% end %>
         <div class="card-body">
-            <h1>フード一覧</h1>
-            <table class="table">
-              <thead>
+            <h3 class="card-title">
+                <%= @restaurant.name %>
+            </h3>
+            <p class="card-text">
+                <strong>レストランのアドレス:</strong>
+                <%= @restaurant.addresss %>
+            </p>
+            <p class="card-text">
+                <strong>詳細:</strong>
+                <%= @restaurant.detail %>
+            </p>
+
+            <%= link_to '編集' , edit_restaurant_path(@restaurant), class:"btn btn-primary" %> |
+            <%= link_to '戻る' , restaurants_path, class:"btn btn-warning" %>
+        </div>
+    </div>
+
+    <div class="c2 p-3">
+        <h3>フード一覧</h3>
+
+        <table class="table">
+            <thead>
                 <tr>
                     <th>フード名</th>
                     <th>値段</th>
                 </tr>
-              </thead>
-        
-              <tbody>
+            </thead>
+
+            <tbody>
+                <% @restaurant.foods.each do |food| %>
                 <tr>
-                    <td>112</td>
+                    <td>
+                        <%= food.name %>
+                    </td>
+                    <td>
+                        <%= food.description %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <hr>
+        <%= link_to "Add food", class:"btn btn-primary" %>
+    </div>
+
+    <div class="c3 p-3">
+        <h3>Comment</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>お名前</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Duong</td>
                     <td>asdfsdf</td>
                 </tr>
-              </tbody>
-            </table>
-        
-            <br>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
