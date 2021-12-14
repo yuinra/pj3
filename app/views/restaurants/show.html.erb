@@ -129,9 +129,8 @@
                         <%= review.review %>
                     </td>
                 </tr>
-                <% end %>
+            <% end %>
         </table>
-    
         <% found = 0 %>
         <% @restaurant.restaurant_reviews.each do |review| %>
             <% if review.user_id == current_user.id %>
@@ -143,6 +142,5 @@
         <% if found == 0 %>
             <%= link_to '作成', new_restaurant_restaurant_review_path(@restaurant), class:"btn btn-success" %> 
         <% end %>
-
     </div>
 </div>
