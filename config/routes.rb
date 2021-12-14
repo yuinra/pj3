@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
     resources :restaurants do
       resources :foods
-      
+      resources :restaurant_reviews
     end
-    resources :restaurant_reviews
-    
+
   get 'users/show'
   devise_for :users
   root 'home_page#index'

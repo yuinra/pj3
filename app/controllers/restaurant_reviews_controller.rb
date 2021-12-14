@@ -1,6 +1,7 @@
 class RestaurantReviewsController < ApplicationController
   before_action :set_restaurant_review, only: %i[ show edit update destroy ]
-#   before_action :find_restaurant
+  before_action :find_restaurant
+ 
   # GET /restaurant_reviews or /restaurant_reviews.json
   def index
     @restaurant_reviews = RestaurantReview.all
@@ -25,10 +26,10 @@ class RestaurantReviewsController < ApplicationController
   def create
     @restaurant_review = RestaurantReview.new(restaurant_review_params)
     @restaurant_review.user_id = current_user.id
-    # @restaurant_review.restaurant_id = @restaurant.id
+    @restaurant_review.restaurant_id = @restaurant.id
     respond_to do |format|
       if @restaurant_review.save
-        format.html { redirect_to restaurants_path, notice: "Restaurant review was successfully created." }
+        format.html { redirect_to restaurants_path(@restaurant), notice: "Restaurant review was successfully created." }
         format.json { render :index, status: :created, location: @restaurant_review }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +42,7 @@ class RestaurantReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @restaurant_review.update(restaurant_review_params)
-        format.html { redirect_to @restaurant_review, notice: "Restaurant review was successfully updated." }
+        format.html { redirect_to restaurant_path(@restaurant), notice: "Restaurant review was successfully updated." }
         format.json { render :show, status: :ok, location: @restaurant_review }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,6 +68,13 @@ class RestaurantReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def restaurant_review_params
-      params.require(:restaurant_review).permit(:user_id, :restaurant_id, :rating, :review, :images)
+      params.require(:restaurant_review).permit(:user_id, :restaurant_id, :rating, :review)
     end
+    
+    def find_restaurant
+        @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+    
+
+
 end
