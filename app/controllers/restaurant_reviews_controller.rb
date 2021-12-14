@@ -29,7 +29,7 @@ class RestaurantReviewsController < ApplicationController
     @restaurant_review.restaurant_id = @restaurant.id
     respond_to do |format|
       if @restaurant_review.save
-        format.html { redirect_to restaurants_path(@restaurant), notice: "Restaurant review was successfully created." }
+        format.html { redirect_to restaurant_path(@restaurant), notice: "Restaurant review was successfully created." }
         format.json { render :index, status: :created, location: @restaurant_review }
       else
         format.html { render :new, status: :unprocessable_entity }

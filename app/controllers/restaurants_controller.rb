@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[ show edit update destroy ]
-
+before_action :authenticate_user!
   # GET /restaurants or /restaurants.json
   def index
     @restaurants = Restaurant.all
@@ -11,7 +11,7 @@ class RestaurantsController < ApplicationController
       if @restaurant.restaurant_reviews.blank?
           @average_review = 0
       else 
-          @average_review = @restaurant.restaurant_reviews.average(:rating).round(2)
+          @average_review = @restaurant.restaurant_reviews.average(:rating).present? ? @restaurant.restaurant_reviews.average(:rating).round(2) : 0
       end
   end
 
