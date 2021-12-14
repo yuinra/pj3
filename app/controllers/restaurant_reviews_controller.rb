@@ -55,7 +55,7 @@ class RestaurantReviewsController < ApplicationController
   def destroy
     @restaurant_review.destroy
     respond_to do |format|
-      format.html { redirect_to restaurant_reviews_url, notice: "Restaurant review was successfully destroyed." }
+      format.html { redirect_to restaurant_path(@restaurant), notice: "Restaurant review was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -67,6 +67,10 @@
                 <strong>詳細:</strong>
                 <%= @restaurant.detail %>
             </p>
+            <p class="card-text">
+                <strong>評価:</strong>
+                <%= @average_review %>
+            </p>
 
             <%= link_to '編集' , edit_restaurant_path(@restaurant), class:"btn btn-primary" %> |
             <%= link_to '戻る' , restaurants_path, class:"btn btn-warning" %> |
@@ -127,14 +131,17 @@
                 </tr>
                 <% end %>
         </table>
-        <%= link_to '作成', new_restaurant_restaurant_review_path(@restaurant), class:"btn btn-success" %> |
+        <%= link_to '作成', new_restaurant_restaurant_review_path(@restaurant), class:"btn btn-success" %> 
+
+        <% found = 0 %>
         <% @restaurant.restaurant_reviews.each do |review| %>
             <% if review.user_id == current_user.id %>
                 <%= link_to '編集', edit_restaurant_restaurant_review_path(@restaurant, review), class:"btn btn-warning" %>
-                <%= link_to '削除', destroy_restaurant_restaurant_review_path(@restaurant), class:"btn btn-success" %> |
-
+                <%= link_to '削除', [@restaurant, review],:method => :delete, class:"btn btn-danger" %> 
+                <% found = 1 %>
+                <% break %>
             <% end %>
-            <% end %>
+        <% end %>
         
 
     </div>
